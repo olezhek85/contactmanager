@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
 
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
@@ -12,7 +13,7 @@ class AddContact extends Component {
     errors: {}
   };
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value });
+  handleChange = ({ target }) => this.setState({ [target.name]: target.value });
 
   handleSubmit = async (dispatch, e) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ class AddContact extends Component {
 
     this.setState({ name: '', email: '', phone: '', errors: {} });
 
-    this.props.history.push('/');
+    navigate('/');
   };
 
   render() {

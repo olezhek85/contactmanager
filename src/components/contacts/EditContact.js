@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
+import { navigate } from '@reach/router';
 
 import { Consumer } from '../../context';
 import TextInputGroup from '../layout/TextInputGroup';
@@ -14,7 +15,7 @@ class EditContact extends Component {
 
   async componentDidMount() {
     try {
-      const { id } = this.props.match.params;
+      const { id } = this.props;
       const response = await axios.get(
         `https://jsonplaceholder.typicode.com/users/${id}`
       );
@@ -46,7 +47,7 @@ class EditContact extends Component {
       return;
     }
 
-    const { id } = this.props.match.params;
+    const { id } = this.props;
 
     const updateContact = {
       name,
@@ -66,7 +67,7 @@ class EditContact extends Component {
 
     this.setState({ name: '', email: '', phone: '', errors: {} });
 
-    this.props.history.push('/');
+    navigate('/');
   };
 
   render() {
