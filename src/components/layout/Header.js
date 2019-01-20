@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { NavLink, Link } from 'react-router-dom';
+import { Link } from '@reach/router';
 
 const Header = ({ title }) => (
   <nav className="navbar navbar-expand-sm navbar-dark bg-danger mb-3 py-0">
@@ -11,19 +11,19 @@ const Header = ({ title }) => (
       <div>
         <ul className="navbar-nav mr-auto">
           <li className="nav-item">
-            <NavLink exact to="/" className="nav-link">
+            <Link to="/" className="nav-link">
               <i className="fas fa-home" /> Home
-            </NavLink>
+            </Link>
           </li>
           <li className="nav-item">
-            <NavLink exact to="/contact/add" className="nav-link">
+            <Link to="/contact/add" className="nav-link">
               <i className="fas fa-plus" /> Add
-            </NavLink>
+            </Link>
           </li>
           <li className="nav-item">
-            <NavLink exact to="/about" className="nav-link">
+            <Link to="/about" className="nav-link">
               <i className="fas fa-question" /> About
-            </NavLink>
+            </Link>
           </li>
         </ul>
       </div>
