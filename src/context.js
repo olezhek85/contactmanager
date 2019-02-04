@@ -1,7 +1,7 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import axios from 'axios'
+import React, { Component } from 'react'
 
-const Context = React.createContext();
+const Context = React.createContext()
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -10,13 +10,13 @@ const reducer = (state, action) => {
         ...state,
         contacts: state.contacts.filter(
           contact => contact.id !== action.payload
-        )
-      };
+        ),
+      }
     case 'ADD_CONTACT':
       return {
         ...state,
-        contacts: [...state.contacts, action.payload]
-      };
+        contacts: [...state.contacts, action.payload],
+      }
     case 'UPDATE_CONTACT':
       return {
         ...state,
@@ -25,27 +25,27 @@ const reducer = (state, action) => {
             contact.id === action.payload.id
               ? (contact = action.payload)
               : contact
-        )
-      };
+        ),
+      }
     default:
-      return state;
+      return state
   }
-};
+}
 
 export class Provider extends Component {
   state = {
     contacts: [],
-    dispatch: action => this.setState(state => reducer(state, action))
-  };
+    dispatch: action => this.setState(state => reducer(state, action)),
+  }
 
   async componentDidMount() {
     try {
       const response = await axios.get(
         'https://jsonplaceholder.typicode.com/users'
-      );
-      this.setState({ contacts: response.data });
+      )
+      this.setState({ contacts: response.data })
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
 
@@ -54,8 +54,8 @@ export class Provider extends Component {
       <Context.Provider value={this.state}>
         {this.props.children}
       </Context.Provider>
-    );
+    )
   }
 }
 
-export const Consumer = Context.Consumer;
+export const Consumer = Context.Consumer

@@ -1,11 +1,14 @@
-import React from 'react';
+import React from 'react'
+import pack from '../../../package.json'
 
 const About = () => (
-  <div>
-    <h1 className="display-4">About Contact Manager</h1>
-    <p className="lead">Simple app to manage contacts</p>
-    <p className="text-secondary">Version 1.0.0</p>
-  </div>
-);
+  <React.Fragment>
+    <h1 className="title is-1" style={{ marginTop: '1rem' }}>
+      About Contact Manager
+    </h1>
+    <h1 className="subtitle is-3">Simple app to manage contacts</h1>
+    <h1 className="subtitle is-6">Version {pack.version}</h1>
+  </React.Fragment>
+)
 
-export default About;
+export default About
