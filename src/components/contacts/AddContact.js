@@ -1,71 +1,76 @@
-import axios from 'axios';
-import React, { Component } from 'react';
-import { navigate } from '@reach/router';
+import axios from 'axios'
+import React, { Component } from 'react'
+import { navigate } from '@reach/router'
 
-import { Consumer } from '../../context';
-import TextInputGroup from '../layout/TextInputGroup';
+import { Consumer } from '../../context'
+import TextInputGroup from '../layout/TextInputGroup'
 
 class AddContact extends Component {
   state = {
     name: '',
     email: '',
     phone: '',
-    errors: {}
-  };
+    errors: {},
+  }
 
-  handleChange = ({ target }) => this.setState({ [target.name]: target.value });
+  handleChange = ({ target }) => this.setState({ [target.name]: target.value })
 
   handleSubmit = async (dispatch, e) => {
-    e.preventDefault();
-    const { name, email, phone } = this.state;
+    e.preventDefault()
+    const { name, email, phone } = this.state
 
     if (name === '') {
-      this.setState({ errors: { name: 'Name is required' } });
-      return;
+      this.setState({ errors: { name: 'Name is required' } })
+      return
     }
 
     if (email === '') {
-      this.setState({ errors: { email: 'Email is required' } });
-      return;
+      this.setState({ errors: { email: 'Email is required' } })
+      return
     }
 
     if (phone === '') {
-      this.setState({ errors: { phone: 'Phone is required' } });
-      return;
+      this.setState({ errors: { phone: 'Phone is required' } })
+      return
     }
 
     const newContact = {
       name,
       email,
-      phone
-    };
+      phone,
+    }
 
     try {
       const response = await axios.post(
         'https://jsonplaceholder.typicode.com/users',
         newContact
-      );
-      dispatch({ type: 'ADD_CONTACT', payload: response.data });
+      )
+      dispatch({ type: 'ADD_CONTACT', payload: response.data })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
 
-    this.setState({ name: '', email: '', phone: '', errors: {} });
+    this.setState({ name: '', email: '', phone: '', errors: {} })
 
-    navigate('/');
-  };
+    navigate('/')
+  }
 
   render() {
-    const { name, email, phone, errors } = this.state;
+    const { name, email, phone, errors } = this.state
 
     return (
       <Consumer>
         {value => {
-          const { dispatch } = value;
+          const { dispatch } = value
           return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
+            <div
+              className="card"
+              style={{ marginBottom: '3rem', marginTop: '1rem' }}
+            >
+              <header className="card-header">
+                <p className="card-header-title">Add Contact</p>
+              </header>
+              <div className="card-content">
                 <form onSubmit={this.handleSubmit.bind(this, dispatch)}>
                   <TextInputGroup
                     label="Name"
@@ -95,16 +100,16 @@ class AddContact extends Component {
                   <input
                     type="submit"
                     value="Add Contact"
-                    className="btn btn-light btn-block"
+                    className="button is-link"
                   />
                 </form>
               </div>
             </div>
-          );
+          )
         }}
       </Consumer>
-    );
+    )
   }
 }
 
-export default AddContact;
+export default AddContact

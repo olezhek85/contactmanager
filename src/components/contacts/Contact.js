@@ -1,85 +1,95 @@
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { Link } from '@reach/router';
+import axios from 'axios'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+import { Link } from '@reach/router'
 
-import { Consumer } from '../../context';
-
-const contactInfoStyle = { cursor: 'pointer' };
-
-const removeContactStyle = {
-  ...contactInfoStyle,
-  float: 'right',
-  color: 'red'
-};
-
-const editContactStyle = {
-  ...removeContactStyle,
-  color: 'black',
-  marginRight: '1rem'
-};
+import { Consumer } from '../../context'
 
 class Contact extends Component {
   state = {
-    showContactInfo: false
-  };
+    showContactInfo: false,
+  }
 
   handleShowContactInfo = () => {
-    this.setState({ showContactInfo: !this.state.showContactInfo });
-  };
+    this.setState(prevState => ({
+      showContactInfo: !prevState.showContactInfo,
+    }))
+  }
 
   handleDeleteContact = async (id, dispatch) => {
     try {
-      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
-      dispatch({ type: 'DELETE_CONTACT', payload: id });
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`)
+      dispatch({ type: 'DELETE_CONTACT', payload: id })
     } catch (error) {
-      console.log(error);
-      dispatch({ type: 'DELETE_CONTACT', payload: id });
+      console.log(error)
+      dispatch({ type: 'DELETE_CONTACT', payload: id })
     }
-  };
+  }
 
   render() {
-    const { showContactInfo } = this.state;
-    const { id, name, email, phone } = this.props.contact;
+    const { showContactInfo } = this.state
+    const { id, name, email, phone } = this.props.contact
 
     return (
       <Consumer>
         {value => {
-          const { dispatch } = value;
+          const { dispatch } = value
           return (
-            <div className="card card-body mb-3">
-              <h4>
-                {name}{' '}
-                <i
+            <div className="card" style={{ marginBottom: '1rem' }}>
+              <header className="card-header">
+                <p className="card-header-title">
+                  {name}
+                  <a
+                    role="presentation"
+                    className="card-header-icon is-paddingless"
+                    aria-label="more options"
+                    onClick={this.handleShowContactInfo}
+                  >
+                    <span className="icon">
+                      <i className="fas fa-angle-down" aria-hidden="true" />
+                    </span>
+                  </a>
+                </p>
+                <Link
+                  to={`/contact/edit/${id}`}
+                  className="card-header-icon"
+                  aria-label="more options"
                   onClick={this.handleShowContactInfo}
-                  className="fas fa-sort-down"
-                  style={contactInfoStyle}
-                />
-                <i
-                  className="fas fa-times"
-                  style={removeContactStyle}
-                  onClick={this.handleDeleteContact.bind(this, id, dispatch)}
-                />
-                <Link to={`/contact/edit/${id}`}>
-                  <i className="fas fa-pencil-alt" style={editContactStyle} />
+                >
+                  <span className="icon">
+                    <i className="far fa-edit" aria-hidden="true" />
+                  </span>
                 </Link>
-              </h4>
+                <a
+                  role="presentation"
+                  className="card-header-icon"
+                  aria-label="more options"
+                  style={{ paddingLeft: 0 }}
+                  onClick={this.handleDeleteContact.bind(this, id, dispatch)}
+                >
+                  <span className="icon has-text-danger">
+                    <i className="far fa-trash-alt" />
+                  </span>
+                </a>
+              </header>
               {showContactInfo && (
-                <ul className="list-group">
-                  <li className="list-group-item">Email: {email}</li>
-                  <li className="list-group-item">Phone: {phone}</li>
-                </ul>
+                <div className="card-content">
+                  <div className="content">
+                    <p className="subtitle is-6">Email: {email}</p>
+                    <p className="subtitle is-6">Phone: {phone}</p>
+                  </div>
+                </div>
               )}
             </div>
-          );
+          )
         }}
       </Consumer>
-    );
+    )
   }
 }
 
 Contact.propTypes = {
-  contact: PropTypes.object.isRequired
-};
+  contact: PropTypes.object.isRequired,
+}
 
-export default Contact;
+export default Contact

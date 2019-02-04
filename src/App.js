@@ -1,14 +1,14 @@
-import React from 'react';
-import { Router } from '@reach/router';
+import React from 'react'
+import { Router } from '@reach/router'
 
-import About from './components/pages/About';
-import Header from './components/layout/Header';
-import NotFound from './components/pages/NotFound';
-import AddContact from './components/contacts/AddContact';
-import ContactList from './components/contacts/ContactList';
-import EditContact from './components/contacts/EditContact';
+import About from './components/pages/About'
+import Header from './components/layout/Header'
+import NotFound from './components/pages/NotFound'
+import AddContact from './components/contacts/AddContact'
+import ContactList from './components/contacts/ContactList'
+import EditContact from './components/contacts/EditContact'
 
-import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bulma/css/bulma.min.css'
 
 const App = () => (
   <React.Fragment>
@@ -23,6 +23,6 @@ const App = () => (
       </Router>
     </div>
   </React.Fragment>
-);
+)
 
-export default App;
+export default App
