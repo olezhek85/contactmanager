@@ -19,7 +19,7 @@ class Header extends Component {
       <nav className="navbar is-danger">
         <div className="container">
           <div className="navbar-brand">
-            <Link to="/" className="navbar-item">
+            <Link to={process.env.PUBLIC_URL + '/'} className="navbar-item">
               {title}
             </Link>
             <a
@@ -47,19 +47,25 @@ class Header extends Component {
             }
           >
             <div className="navbar-end">
-              <Link to="/" className="navbar-item">
+              <Link to={process.env.PUBLIC_URL + '/'} className="navbar-item">
                 <span className="icon is-marginless">
                   <i className="fas fa-home" />
                 </span>
                 Home
               </Link>
-              <Link to="/contact/add" className="navbar-item">
+              <Link
+                to={process.env.PUBLIC_URL + '/contact/add'}
+                className="navbar-item"
+              >
                 <span className="icon is-marginless">
                   <i className="fas fa-plus" />
                 </span>
                 Add
               </Link>
-              <Link to="/about" className="navbar-item">
+              <Link
+                to={process.env.PUBLIC_URL + '/about'}
+                className="navbar-item"
+              >
                 <span className="icon is-marginless">
                   <i className="fas fa-question" />
                 </span>
