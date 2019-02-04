@@ -67,7 +67,7 @@ class EditContact extends Component {
 
     this.setState({ name: '', email: '', phone: '', errors: {} })
 
-    navigate('/')
+    navigate(process.env.PUBLIC_URL + '/')
   }
 
   render() {

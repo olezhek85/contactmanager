@@ -51,7 +51,7 @@ class Contact extends Component {
                   </a>
                 </p>
                 <Link
-                  to={`/contact/edit/${id}`}
+                  to={process.env.PUBLIC_URL + `/contact/edit/${id}`}
                   className="card-header-icon"
                   aria-label="more options"
                   onClick={this.handleShowContactInfo}
